@@ -8,7 +8,7 @@
 
 <script>
     export default {
-        name: 'nideshop-admin'
+        name: 'hiolabs-admin'
     }
 </script>
 

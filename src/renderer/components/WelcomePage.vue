@@ -2,7 +2,7 @@
     <div class="content-page">
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
-                <el-breadcrumb-item :to="{ path: '/dashboard' }">后台主页</el-breadcrumb-item>
+                <el-breadcrumb-item>后台主页</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="content-main clearfix">

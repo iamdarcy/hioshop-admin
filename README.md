@@ -93,7 +93,10 @@ npm run build:web
 + 用户列表：用户的一些使用踪迹
 + 店铺设置：广告列表，公告管理，运费模板（可以根据地区设置相应的运费），管理员
 
-- 项目地址：https://github.com/iamdarcy/hioshop-admin
+- 项目地址
+后台管理：https://github.com/iamdarcy/hioshop-admin  
+服务端： https://github.com/iamdarcy/hioshop-server  
+微信小程序：https://github.com/iamdarcy/hioshop-miniprogram  
 
 - 喜欢别忘了 Star，有问题可通过微信、QQ群联系我，谢谢您的关注。
 <img width="1200" src="http://lucky-other.meiweiyuxian.com/github/contact.jpg"/>

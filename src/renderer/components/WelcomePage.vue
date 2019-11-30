@@ -7,7 +7,7 @@
         </div>
         <div class="content-main clearfix">
             <div class="notice">
-                <div class="l">本演示后台数据为演示数据，可以随意操作，系统每10分钟重置一次</div>
+                <div class="l">本演示后台数据为演示数据，可以随意操作，系统每5分钟重置一次</div>
                 <div class="r" v-if="resetVision">
                     <label>重置倒计时：</label>
                     <countdown class="count" endTime="" :callback="callback" endText="已经结束了"></countdown>

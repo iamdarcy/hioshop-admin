@@ -100,7 +100,7 @@
                             else if (response.data.errno === 400) {
                                 this.$message({
                                     type: 'error',
-                                    message: '管理员用户名已存在'
+                                    message: response.data.errmsg
                                 });
                             }
                             else {

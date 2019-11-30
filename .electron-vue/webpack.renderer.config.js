@@ -93,6 +93,7 @@ let rendererConfig = {
     new ExtractTextPlugin('styles.css'),
     new HtmlWebpackPlugin({
       filename: 'index.html',
+      favicon: 'src/renderer/assets/favicon.ico',
       template: path.resolve(__dirname, '../src/index.ejs'),
       minify: {
         collapseWhitespace: true,

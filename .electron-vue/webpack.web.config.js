@@ -79,7 +79,8 @@ let webConfig = {
         removeAttributeQuotes: true,
         removeComments: true
       },
-      nodeModules: false
+      nodeModules: false,
+      favicon: 'src/renderer/assets/favicon.ico',
     }),
     new webpack.DefinePlugin({
       'process.env.IS_WEB': 'true'

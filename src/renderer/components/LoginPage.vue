@@ -5,7 +5,7 @@
                 <img src="http://lucky-icon.meiweiyuxian.com/hio/pinwheel.jpg"/>
             </div>
             <div class="body">
-                <p class="tips">后台管理</p>
+                <p class="tips">海风小店</p>
                 <el-form ref="form" :model="form" :rules="rules" label-position="top">
                     <el-form-item label="" prop="username">
                         <el-input v-model="form.username" placeholder="用户名"></el-input>

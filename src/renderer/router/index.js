@@ -1,16 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
 Vue.use(Router)
-
 export default new Router({
     scrollBehavior: () => ({y: 0}),
     routes: [
-        // {
-        //     path: '/',
-        //     name: 'dashboard',
-        //     redirect: '/dashboard'
-        // },
         {
             path: '/dashboard',
             name: 'dashboard',
@@ -183,7 +176,7 @@ export default new Router({
         },
         {
             path: '*',
-            redirect: '/dashboard/welcome'
+            redirect: '/dashboard'
         }
     ]
 })

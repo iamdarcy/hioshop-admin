@@ -421,27 +421,29 @@
                 this.$refs.upload.submit();
             },
             delePicList() {
-                let id = this.infoForm.id;
-                this.$confirm('确定删除首图？', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                }).then(() => {
-                    this.axios.post('goods/deleteListPicUrl', {id: id}).then((response) => {
-                        if (response.data.errno === 0) {
-                            this.$message({
-                                type: 'success',
-                                message: '删除成功'
-                            });
-                            this.infoForm.list_pic_url = '';
-                        } else {
-                            this.$message({
-                                type: 'error',
-                                message: '删除失败'
-                            })
-                        }
-                    });
-                });
+                // 不删除服务器上的图片，上传新的自动替换旧的
+                this.infoForm.list_pic_url = '';
+                // let id = this.infoForm.id;
+                // this.$confirm('确定删除首图？', '提示', {
+                //     confirmButtonText: '确定',
+                //     cancelButtonText: '取消',
+                //     type: 'warning'
+                // }).then(() => {
+                //     this.axios.post('goods/deleteListPicUrl', {id: id}).then((response) => {
+                //         if (response.data.errno === 0) {
+                //             this.$message({
+                //                 type: 'success',
+                //                 message: '删除成功'
+                //             });
+                //             this.infoForm.list_pic_url = '';
+                //         } else {
+                //             this.$message({
+                //                 type: 'error',
+                //                 message: '删除失败'
+                //             })
+                //         }
+                //     });
+                // });
             },
             // handleRemove(file, fileList) {
             //     console.log(file, fileList);
@@ -611,8 +613,12 @@
             },
             handleUploadListSuccess(res) {
                 let url = this.url;
-                console.log(url + res.key);
                 this.infoForm.list_pic_url = url + res.key;
+                this.axios.post('goods/uploadHttpsImage', {url:this.infoForm.list_pic_url}).then((response) => {
+                    let lastUrl = response.data.data;
+                    console.log(lastUrl);
+                    this.infoForm.https_pic_url = lastUrl;
+                })
             },
             handleUploadIndexPicSuccess(res) {
                 let url = this.url;

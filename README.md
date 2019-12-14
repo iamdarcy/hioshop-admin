@@ -93,6 +93,10 @@ npm run build:web
 + 用户列表：用户的一些使用踪迹
 + 店铺设置：广告列表，公告管理，运费模板（可以根据地区设置相应的运费），管理员
 
+### 最近更新 
+- 新增生成分享图的功能
+<img width="1000" src="http://lucky-other.meiweiyuxian.com/github/save-local.jpg"/>
+
 - 项目地址  
 后台管理：https://github.com/iamdarcy/hioshop-admin  
 服务端： https://github.com/iamdarcy/hioshop-server  

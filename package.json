@@ -1,7 +1,7 @@
 {
-  "name": "seeksea-admin",
+  "name": "hioshop-admin",
   "version": "0.0.0",
-  "author": "tumobi <tumobi@163.com>",
+  "author": "sligxl@163.com",
   "description": "An electron-vue project",
   "license": null,
   "main": "./dist/electron/main.js",
@@ -17,7 +17,7 @@
     "postinstall": ""
   },
   "build": {
-    "productName": "seeksea-admin",
+    "productName": "hioshop-admin",
     "appId": "org.simulatedgreg.electron-vue",
     "directories": {
       "output": "build"

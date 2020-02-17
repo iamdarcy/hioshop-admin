@@ -5,6 +5,9 @@
 + 服务端api基于Ｎode.js+ThinkJS+MySQL
 + 后台管理 基于VUE.js+element-ui
 
+#### 视频教程
+https://www.bilibili.com/video/av89568075
+
 #### 本项目需要配合  
 服务端： https://github.com/iamdarcy/hioshop-server  
 微信小程序：https://github.com/iamdarcy/hioshop-miniprogram

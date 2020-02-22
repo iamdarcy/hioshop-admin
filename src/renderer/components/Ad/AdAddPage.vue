@@ -18,7 +18,7 @@
                         <el-upload
                                 class="upload-demo"
                                 name="file"
-                                action="http://up.qiniu.com/"
+                                :action="qiniuZone"
                                 :on-remove="adRemove"
                                 :before-remove="beforeAdRemove"
                                 :file-list="fileList"
@@ -97,6 +97,7 @@
     export default {
         data() {
             return {
+                qiniuZone:'',
                 root: '',
                 fileList: [],
                 uploaderHeader: {
@@ -258,6 +259,7 @@
             this.getInfo();
             this.root = api.rootUrl;
             this.getQiniuToken();
+            this.qiniuZone = api.qiniu;
         }
     }
 

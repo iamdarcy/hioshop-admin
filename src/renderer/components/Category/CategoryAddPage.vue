@@ -30,7 +30,7 @@
                         <el-upload
                                 class="upload-demo"
                                 name="file"
-                                action="http://up.qiniu.com/"
+                                :action="qiniuZone"
                                 :on-remove="bannerRemove"
                                 :before-remove="beforeBannerRemove"
                                 :file-list="fileList"
@@ -50,7 +50,7 @@
                         <el-upload
                                 class="upload-demo"
                                 name="file"
-                                action="http://up.qiniu.com/"
+                                :action="qiniuZone"
                                 :on-remove="iconRemove"
                                 :before-remove="beforeIconRemove"
                                 :file-list="fileList2"
@@ -84,6 +84,7 @@
         data() {
             return {
                 root: '',
+                qiniuZone:'',
                 fileList: [],
                 fileList2: [],
                 uploaderHeader: {
@@ -235,6 +236,7 @@
             this.infoForm.id = this.$route.query.id || 0;
             this.getInfo();
             this.root = api.rootUrl;
+            this.qiniuZone = api.qiniu;
             this.getQiniuToken();
         }
     }

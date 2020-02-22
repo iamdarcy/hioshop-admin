@@ -35,7 +35,7 @@
                         <el-upload
                                 name="file"
                                 class="upload-demo"
-                                action="http://up.qiniu.com/"
+                                :action="qiniuZone"
                                 :on-success="handleUploadListSuccess"
                                 :before-upload="getQiniuToken"
                                 list-type="picture-card"
@@ -49,7 +49,7 @@
                         <el-upload
                                 name="file"
                                 class="upload-demo"
-                                action="http://up.qiniu.com/"
+                                :action="qiniuZone"
                                 list-type="picture-card"
                                 :on-preview="galleryPreview"
                                 :on-success="handleUploadGallerySuccess"
@@ -98,7 +98,7 @@
                         <el-upload
                                 name="file"
                                 class="avatar-uploader"
-                                action="http://up.qiniu.com/"
+                                :action="qiniuZone"
                                 list-type="picture-card"
                                 :file-list="detail_list"
                                 :before-upload="beforeUpload"
@@ -235,6 +235,7 @@
         data() {
             return {
                 root: '',
+                qiniuZone:'',
                 picData: {
                     token: ''
                 },
@@ -790,6 +791,7 @@
                 this.getGalleryList();
             }
             this.root = api.rootUrl;
+            this.qiniuZone = api.qiniu;
         },
     }
 

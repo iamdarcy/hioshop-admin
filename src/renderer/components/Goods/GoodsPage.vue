@@ -128,7 +128,7 @@
                     <!--<el-table-column prop="retail_price" label="售价" width="80" sortable></el-table-column>-->
                     <el-table-column prop="goods_number" label="库存" width="80" sortable>
                     </el-table-column>
-                    <el-table-column prop="has_done" label="完成" width="80" sortable></el-table-column>
+                    <!-- <el-table-column prop="has_done" label="完成" width="80" sortable></el-table-column> -->
                     <el-table-column label="首页显示" width="80">
                         <template scope="scope">
                             <el-switch

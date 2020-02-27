@@ -4,11 +4,11 @@
 			<el-breadcrumb class="breadcrumb" separator="/">
 				<el-breadcrumb-item>管理员</el-breadcrumb-item>
 			</el-breadcrumb>
-			<div class="operation-nav">
+			<!-- <div class="operation-nav">
 				<router-link to="/dashboard/user">
 					<el-button type="primary" icon="plus">添加管理员</el-button>
 				</router-link>
-			</div>
+			</div> -->
 		</div>
 		<div class="content-main">
 			<div class="form-table-box">

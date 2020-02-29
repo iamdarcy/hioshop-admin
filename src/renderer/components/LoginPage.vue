@@ -2,7 +2,7 @@
     <div class="login">
         <div class="login-box">
             <div class="logo">
-                <img src="http://lucky-icon.meiweiyuxian.com/hio/pinwheel.jpg"/>
+                <img src="http://lucky-icon.meiweiyuxian.com/hio/loading2.gif"/>
             </div>
             <div class="body">
                 <p class="tips">海风小店</p>

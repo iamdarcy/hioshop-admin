@@ -1,7 +1,7 @@
 <template>
     <div class="left-box">
         <div class="logo">
-            <img src="http://lucky-icon.meiweiyuxian.com/hio/pinwheel.jpg"/>
+            <img src="http://lucky-icon.meiweiyuxian.com/hio/loading2.gif"/>
         </div>
         <el-menu class="sidebar" :unique-opened="true" :default-active="currentPagePath" @open="handleOpen"
                  :router="true" @close="handleClose">

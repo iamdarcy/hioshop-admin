@@ -2,7 +2,7 @@
     <div class="login">
         <div class="login-box">
             <div class="logo">
-                <img src="http://lucky-icon.meiweiyuxian.com/hio/loading2.gif"/>
+                <img src="static/images/loading2.gif"/>
             </div>
             <div class="body">
                 <p class="tips">海风小店</p>
@@ -107,7 +107,7 @@
 <style>
     .login {
         align-items: center;
-        background: url("http://lucky-other.meiweiyuxian.com/github/back1.jpg");
+        background: url("/static/images/back1.jpg");
         background-size: 100%;
         background-repeat:no-repeat;
         display: flex;

@@ -61,6 +61,7 @@
                         password: this.form.password
                     }).then((res) => {
                         let call = res.data;
+                        console.log(call);
                         this.loading = false;
                         if (res.data.errno === 0) {
                             console.log(res.data.data);
@@ -84,7 +85,7 @@
                                 this.$router.push({name: 'wap'});
                             }
 
-                        } else if(call.errno == 400){
+                        } else{
                             this.$message({
                                 type: 'error',
                                 message: call.errmsg

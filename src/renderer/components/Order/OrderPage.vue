@@ -35,16 +35,20 @@
                 <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
                     <div v-for="item in tableData" class="list-wrap clearfix">
                         <div class="header clearfix">
-                            <div class="status-text">{{item.order_status_text}}{{item.is_fake ? '--假的订单' : ''}}</div>
-                            <div class="add-time">下单时间：{{item.add_time}}</div>
-                            <div class="pay-time" v-if="item.pay_time != 0">付款时间：{{item.pay_time}}</div>
-                            <div class="order-id">订单号：{{item.order_sn}}</div>
-
-                            <div class="price-wrap">当前合计{{item.actual_price}}元（含运费{{item.freight_price}}元）</div>
-                            <div v-if="item.change_price!= item.actual_price" class="price-change">
-                                改价前{{item.change_price}}元
+                            <div class="left">
+                                <div class="off-text" v-if="item.offline_pay">线下支付订单</div>
+                                <div class="status-text">{{item.order_status_text}}</div>
+                                <div class="add-time">下单时间：{{item.add_time}}</div>
+                                <div class="pay-time" v-if="item.pay_time != 0">付款时间：{{item.pay_time}}</div>
+                                <div class="order-id">订单号：{{item.order_sn}}</div>
                             </div>
-                            <div class="goods-num">共{{item.goodsCount}}件商品</div>
+                            <div class="right">
+                                <div class="goods-num">共{{item.goodsCount}}件商品</div>
+                                <div v-if="item.change_price!= item.actual_price" class="price-change">
+                                    改价前{{item.change_price}}元
+                                </div>
+                                <div class="price-wrap">当前合计{{item.actual_price}}元（含运费{{item.freight_price}}元）</div>
+                            </div>
                         </div>
                         <div class="content-wrap clearfix">
                             <div class="left">
@@ -1286,8 +1290,13 @@
 
     .filter-box {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
+    }
+
+    .filter-box .box{
+        margin-right: 20px;
+        margin-bottom: 10px;
     }
 
     .demo-form-inline {
@@ -1318,30 +1327,49 @@
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .header .left{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .header .right{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+
+    .off-text{
+        color: #fff;
+        border-radius: 4px;
+        background: #594d72;
+        height: 15px;
+        line-height: 15px;
+        padding: 4px 10px;
+        font-size: 12px;
+        margin-right: 10px;
     }
 
     .status-text {
-        float: left;
         color: #f0797f;
         margin-right: 10px;
     }
 
     .add-time {
-        float: left;
         margin-right: 20px;
     }
 
     .pay-time {
-        float: left;
         margin-right: 20px;
     }
 
-    .order-id {
-        float: left;
-    }
-
     .goods-num {
-        float: right;
         margin-right: 20px;
     }
 

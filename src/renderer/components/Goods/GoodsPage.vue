@@ -298,6 +298,8 @@
             },
             handleClick(tab, event) {
                 let pindex = tab._data.index;
+                localStorage.setItem('pIndex', pindex);
+                localStorage.setItem('goodsPage', 0)
                 this.activeClass = 0;
                 if (pindex == 0) {
                     this.getList();
@@ -350,19 +352,29 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-
-                    this.axios.post('goods/destory', {id: row.id}).then((response) => {
-                        if (response.data.errno === 0) {
-                            this.$message({
-                                type: 'success',
-                                message: '删除成功!'
-                            });
-
-                            this.getList();
+                let that = this;
+                that.axios.post('goods/destory', {id: row.id}).then((response) => {
+                    if (response.data.errno === 0) {
+                        that.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                        let pIndex = localStorage.getItem('pIndex');
+                        console.log(pIndex);
+                        if (pIndex == 0) {
+                            that.getList();
                         }
-                    })
-
-
+                        else if (pIndex == 1) {
+                            that.getOnSaleList();
+                        }
+                        else if (pIndex == 2) {
+                            that.getOutList();
+                        }
+                        else if (pIndex == 3) {
+                            that.getDropList();
+                        }
+                    }
+                })
                 }).catch(() => {
 //                    this.$message({
 //                        type: 'info',
@@ -381,7 +393,6 @@
                         name: ''
                     }
                 }).then((response) => {
-                    console.log(response.data)
                     this.tableData = response.data.data.data
                     this.page = response.data.data.currentPage
                     this.total = response.data.data.count
@@ -394,7 +405,6 @@
                         name: this.filterForm.name
                     }
                 }).then((response) => {
-                    console.log(response.data)
                     this.tableData = response.data.data.data
                     this.page = response.data.data.currentPage
                     this.total = response.data.data.count
@@ -435,7 +445,6 @@
             },
             sortOrder(num) {
                 this.num = num;
-                console.log(num);
                 this.pIndex = 4;
                 this.activeClass = num;
                 this.axios.get('goods/sort', {

@@ -599,7 +599,7 @@
                                     type: 'success',
                                     message: '保存成功'
                                 });
-                                // this.$router.go(-1);
+                                this.$router.go(-1);
                             } else {
                                 this.$message({
                                     type: 'error',

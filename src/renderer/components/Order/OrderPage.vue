@@ -243,7 +243,7 @@
                 </div>
                 <div class="f-right" v-if="dform.method != 1">
                     <el-button style="margin-right: 20px;" @click="dialogFormVisible = false">取 消</el-button>
-                    <el-button v-if="autoGoDelivery" type="primary" @click="deliveryGoGo">发货</el-button>
+                    <el-button type="primary" @click="deliveryGoGo">发货</el-button>
                 </div>
                 <div class="f-right" v-if="dform.method == 1">
                     <el-button style="margin-right: 20px;" @click="dialogFormVisible = false">取 消</el-button>

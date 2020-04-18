@@ -19,10 +19,6 @@ https://www.bilibili.com/video/av89568075
 用户名：hiolabs  
 密码：hiolabs
 
-本地后台管理的  
-用户名：admin  
-密码：hiolabs  
-
 <a target="_blank" href="https://www.aliyun.com/acts/limit-buy?userCode=zm04niet"><img width="1400" src="http://lucky-other.meiweiyuxian.com/github/aliyun.jpg"/></a>
 阿里云主机：低至2折<a target="_blank" href="https://www.aliyun.com/acts/limit-buy?userCode=zm04niet">立即去看看</a>
 
@@ -90,7 +86,7 @@ npm run dev
 
 + build 打包成静态文件
 ```
-npm run build:web
+npm run build:web 或者 sudo npm run build:web
 
 ```
 

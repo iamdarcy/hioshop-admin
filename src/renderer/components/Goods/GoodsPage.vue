@@ -12,15 +12,14 @@
         </div>
         <div class="content-main">
             <div class="block">
-                        <span class="wrapper">
-                            <el-button :plain="true" type="primary" :class="activeClass == 1 ? 'active' : '' "
-                                       @click="sortOrder(1)" size="small">按销量排序</el-button>
-                            <el-button :plain="true" type="primary" :class="activeClass == 2 ? 'active' : '' "
-                                       @click="sortOrder(2)" size="small">按售价排序</el-button>
-                            <el-button :plain="true" type="primary" :class="activeClass == 3 ? 'active' : '' "
-                                       @click="sortOrder(3)" size="small">按库存排序</el-button>
-                            <!--<el-button :plain="true" type="info" @click="sortOrder" data-index="3">信息按钮</el-button>-->
-                        </span>
+				<span class="wrapper">
+					<el-button :plain="true" type="primary" :class="activeClass == 1 ? 'active' : '' "
+							   @click="sortOrder(1)" size="small">按销量排序</el-button>
+					<el-button :plain="true" type="primary" :class="activeClass == 2 ? 'active' : '' "
+							   @click="sortOrder(2)" size="small">按售价排序</el-button>
+					<el-button :plain="true" type="primary" :class="activeClass == 3 ? 'active' : '' "
+							   @click="sortOrder(3)" size="small">按库存排序</el-button>
+				</span>
             </div>
             <el-tabs v-model="activeName" @tab-click="handleClick">
                 <el-tab-pane label="全部商品" name="first">
@@ -122,13 +121,9 @@
                             <el-input-number class="sort-width" size="mini" :min="1" :max="100" controls-position="right" v-model="scope.row.sort_order" placeholder="排序" @blur="submitSort(scope.$index, scope.row)" @change="submitSort(scope.$index, scope.row)"></el-input-number>
                         </template>
                     </el-table-column>
-                    <!--<el-table-column prop="category_p_name" label="父类" width="100" sortable></el-table-column>-->
-                    <!--<el-table-column prop="category_name" label="子类" width="100" sortable></el-table-column>-->
                     <el-table-column prop="sell_volume" label="销量" width="80" sortable></el-table-column>
-                    <!--<el-table-column prop="retail_price" label="售价" width="80" sortable></el-table-column>-->
                     <el-table-column prop="goods_number" label="库存" width="80" sortable>
                     </el-table-column>
-                    <!-- <el-table-column prop="has_done" label="完成" width="80" sortable></el-table-column> -->
                     <el-table-column label="首页显示" width="80">
                         <template scope="scope">
                             <el-switch
@@ -159,7 +154,7 @@
                 </el-table>
             </div>
             <div class="page-box">
-                <el-pagination @current-change="handlePageChange" :current-page="page" :page-size="50"
+                <el-pagination @current-change="handlePageChange" :current-page="page" :page-size="size"
                                layout="total, prev, pager, next, jumper" :total="total">
                 </el-pagination>
             </div>
@@ -173,6 +168,7 @@
         data() {
             return {
                 page: 1,
+				size:10,
                 total: 0,
                 filterForm: {
                     name: ''
@@ -298,8 +294,7 @@
             },
             handleClick(tab, event) {
                 let pindex = tab._data.index;
-                localStorage.setItem('pIndex', pindex);
-                localStorage.setItem('goodsPage', 0)
+				this.page = 1;
                 this.activeClass = 0;
                 if (pindex == 0) {
                     this.getList();
@@ -320,11 +315,7 @@
             },
             handlePageChange(val) {
                 this.page = val;
-                //保存到localStorage
-                localStorage.setItem('goodsPage', this.page)
-                localStorage.setItem('goodsFilterForm', JSON.stringify(this.filterForm));
                 let nIndex = this.pIndex;
-
                 if (nIndex == 0) {
                     this.getList();
                 }
@@ -402,6 +393,7 @@
                 this.axios.get('goods', {
                     params: {
                         page: this.page,
+						size: this.size,
                         name: this.filterForm.name
                     }
                 }).then((response) => {
@@ -413,7 +405,8 @@
             getOnSaleList() {
                 this.axios.get('goods/onsale', {
                     params: {
-                        page: this.page
+                        page: this.page,
+						size: this.size
                     }
                 }).then((response) => {
                     this.tableData = response.data.data.data
@@ -424,7 +417,8 @@
             getOutList() {
                 this.axios.get('goods/out', {
                     params: {
-                        page: this.page
+                        page: this.page,
+						size: this.size
                     }
                 }).then((response) => {
                     this.tableData = response.data.data.data;
@@ -435,7 +429,8 @@
             getDropList() {
                 this.axios.get('goods/drop', {
                     params: {
-                        page: this.page
+                        page: this.page,
+						size: this.size
                     }
                 }).then((response) => {
                     this.tableData = response.data.data.data;
@@ -450,6 +445,7 @@
                 this.axios.get('goods/sort', {
                     params: {
                         page: this.page,
+						size: this.size,
                         index: num
                     }
                 }).then((response) => {

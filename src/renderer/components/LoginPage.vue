@@ -108,7 +108,8 @@
 <style>
     .login {
         align-items: center;
-        background: url("/static/images/back1.jpg");
+        background: url("http://hiolabs.com/demo/static/images/back1.jpg"); 
+		/* 以上为登录背景,可以自己更换成自己喜欢的 */
         background-size: 100%;
         background-repeat:no-repeat;
         display: flex;

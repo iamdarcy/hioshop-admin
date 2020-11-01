@@ -26,7 +26,7 @@
                         <div class="form-tip"></div>
                     </el-form-item>
                     <el-form-item label="分类图片" prop="img_url" v-if="infoForm.parent_id == 0">
-                        <img v-if="infoForm.img_url" :src="`${baseURL}${infoForm.img_url}`" class="image-show">
+                        <img v-if="infoForm.img_url" :src="`${infoForm.img_url}`" class="image-show">
                         <el-upload
                                 class="upload-demo"
                                 name="file"
@@ -56,7 +56,7 @@
                                 :file-list="fileList2"
                                 :data="picData"
                                 :on-success="handleUploadIconSuccess"
-                                :before-upload="getQiniuToken"
+                                :before-upload="uploadValidate"
                         >
                             <el-button v-if="!infoForm.icon_url" size="small" type="primary">点击上传</el-button>
                         </el-upload>
@@ -128,15 +128,15 @@
         },
         
         methods: {
-            getQiniuToken() {
-                let that = this
-                this.axios.post('index/getQiniuToken').then((response) => {
-                    let resInfo = response.data.data;
-                    console.log(resInfo);
-                    that.picData.token = resInfo.token;
-                    that.url = resInfo.url;
-                })
-            },
+            // uploadValidate() {
+            //     let that = this
+            //     this.axios.post('index/getQiniuToken').then((response) => {
+            //         let resInfo = response.data.data;
+            //         console.log(resInfo);
+            //         that.picData.token = resInfo.token;
+            //         that.url = resInfo.url;
+            //     })
+            // },
             beforeBannerRemove(file, fileList) {
                 return this.$confirm(`确定移除该图？删除后将无法找回`);
             },
@@ -191,12 +191,13 @@
                 });
             },
             handleUploadBannerSuccess(res, file) {
-                let url = this.url;
-                this.infoForm.img_url = url;
+                console.log(res)
+                // let url = this.url;
+                this.infoForm.img_url = `${api.qiniu}${res.data}`;
             },
             handleUploadIconSuccess(res, file) {
-                let url = this.url;
-                this.infoForm.icon_url = url + res.key;
+                // let url = this.url;
+                this.infoForm.icon_url = `${api.qiniu}${res.data}`;;
             },
             getTopCategory() {
                 this.axios.get('category/topCategory').then((response) => {
@@ -232,9 +233,6 @@
 
         },
         computed: {
-            baseURL() {
-                return api.qiniu
-            }
         },
         components: {ElFormItem},
         mounted() {

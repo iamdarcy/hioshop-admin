@@ -26,7 +26,7 @@
                     </el-form-item>
                     <el-form-item label="商品图片" prop="list_pic_url" v-if="infoForm.list_pic_url"
                                   class="image-uploader-diy new-height">
-                        <img v-if="infoForm.list_pic_url" :src="infoForm.list_pic_url" class="image-show">
+                        <img v-if="infoForm.list_pic_url" :src="getImageURL(infoForm.list_pic_url)" class="image-show">
                         <el-button class="dele-list-pic" type="primary" @click="delePicList">
                             <i class="fa fa-trash-o"></i>
                         </el-button>
@@ -463,7 +463,7 @@
             // },
             handlePreview(file) {
                 console.log(file);
-                this.dialogImageUrl = file.url;
+                this.dialogImageUrl = this.getImageURL(file.url);
                 this.dialogVisible = true;
             },
             galleryBefore() {
@@ -492,14 +492,20 @@
             },
             galleryPreview(file) {
                 console.log(file);
-                this.dialogImageUrl = file.url;
+                this.dialogImageUrl = this.getImageURL(file.url);
                 this.dialogVisible = true;
             },
             getGalleryList() {
                 let goodsId = this.infoForm.id;
                 this.axios.post('goods/getGalleryList', {goodsId: goodsId}
                 ).then((response) => {
-                    this.gallery_list = response.data.data.galleryData;
+                    let gallery_list = response.data.data.galleryData.map(({id, url}) => {
+                        return {
+                            id,
+                            url: this.getImageURL(url)
+                        }
+                    });
+                    this.gallery_list = gallery_list
                 })
             },
             kdChange(kdValue) {
@@ -613,22 +619,20 @@
                 });
             },
             handleUploadListSuccess(res) {
-                let url = this.url;
-                this.infoForm.list_pic_url = url + res.key;
-                this.axios.post('goods/uploadHttpsImage', {url:this.infoForm.list_pic_url}).then((response) => {
-                    let lastUrl = response.data.data;
-                    console.log(lastUrl);
-                    this.infoForm.https_pic_url = lastUrl;
-                })
+                // let url = this.url;
+                this.infoForm.list_pic_url = res.data;
+                // this.axios.post('goods/uploadHttpsImage', {url:this.infoForm.list_pic_url}).then((response) => {
+                //     let lastUrl = response.data.data;
+                //     console.log(lastUrl);
+                //     this.infoForm.https_pic_url = lastUrl;
+                // })
             },
             handleUploadIndexPicSuccess(res) {
-                let url = this.url;
-                console.log(url + res.key);
-                this.infoForm.index_pic_url = url + res.key;
+                // let url = this.url;
+                this.infoForm.index_pic_url = res.data;
             },
             handleUploadDetailSuccess(res) {
-                let url = this.url;
-                let data = url + res.key;
+                let data = this.getImageURL(res.data);
                 let quill = this.$refs.myTextEditor.quill
                 // 如果上传成功
                 // 获取光标所在位置
@@ -644,9 +648,9 @@
             },
             handleUploadGallerySuccess(res) {
                 console.log(res);
-                let url = this.url;
+                // let url = this.url;
                 if (res.key != '') {
-                    let urlData = url + res.key;
+                    let urlData = res.data;
                     let id = this.infoForm.id;
                     let info = {
                         url: urlData,
@@ -777,6 +781,11 @@
         computed: {
             editor() {
                 return this.$refs.myTextEditor.quillEditor
+            },
+            getImageURL() {
+                return (url) => {
+                    return `${api.qiniu}${url}`
+                }
             }
         },
         mounted() {

@@ -226,8 +226,7 @@
                 });
             },
             handleUploadImageSuccess(res, file) {
-                let url = this.url;
-                this.infoForm.image_url = url + res.key;
+                this.infoForm.image_url = `${api.qiniu}${res.data}`;
             },
             getInfo() {
                 if (this.infoForm.id <= 0) {

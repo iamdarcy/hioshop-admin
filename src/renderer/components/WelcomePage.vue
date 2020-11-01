@@ -58,13 +58,13 @@
                                 </el-tabs>
                                 <el-table :data="userData" style="width: 100%" height="550" border stripe>
                                     <el-table-column label="头像" width="80">
-                                        <template scope="scope">
+                                        <template slot-scope="scope">
                                             <img :src="scope.row.avatar" alt="" style="width: 50px;height: 50px">
                                         </template>
                                     </el-table-column>
                                     <el-table-column prop="nickname" label="昵称" width="140"></el-table-column>
                                     <el-table-column prop="gender" label="性别" width="50">
-                                        <template scope="scope">
+                                        <template slot-scope="scope">
                                             {{ scope.row.gender == 2 ? '女' : '男' }}
                                         </template>
                                     </el-table-column>

@@ -18,7 +18,7 @@
 					<el-table-column prop="last_login_time" label="最近登录" width="200"></el-table-column>
 					<el-table-column prop="last_login_ip" label="登录IP" width="200"></el-table-column>
 					<el-table-column label="操作" width="180">
-						<template scope="scope">
+						<template slot-scope="scope">
 							<el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑</el-button>
 							<el-button v-if="scope.row.id != loginInfo.id" plain size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">删除</el-button>
 						</template>

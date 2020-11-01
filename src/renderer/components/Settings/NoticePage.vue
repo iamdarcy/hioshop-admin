@@ -16,12 +16,12 @@
                     <el-table-column prop="content" label="内容"></el-table-column>
                     <el-table-column prop="end_time" label="结束时间" width="180"></el-table-column>
                     <el-table-column prop="enabled" label="状态" width="110px">
-                        <template scope="scope">
+                        <template slot-scope="scope">
                             {{ scope.row.is_delete == 0 ? '启用中' : '已到期下线' }}
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" width="220px">
-                        <template scope="scope">
+                        <template slot-scope="scope">
                             <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑</el-button>
                             <el-button plain size="small" type="danger"
                                        @click="handleRowDelete(scope.$index, scope.row)">删除

@@ -14,7 +14,7 @@
         </div>
         <div class="content-main">
             <el-form ref="infoForm" :model="infoForm">
-                <el-form-item class="in-wrap" label="图片" v-for="item in infoForm.data">
+                <el-form-item class="in-wrap" label="图片" :key="item.id" v-for="item in infoForm.data">
                     <img class="img-wrap" :src="item.img_url" />
                     <el-input class="input-wrap" type="number" size="small" v-model="item.sort_order"
                               placeholder=""></el-input>

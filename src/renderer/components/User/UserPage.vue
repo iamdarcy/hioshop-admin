@@ -29,19 +29,19 @@
 					<el-table-column prop="id" label="ID" width="60">
 					</el-table-column>
 					<el-table-column label="头像" width="80">
-						<template scope="scope">
+						<template slot-scope="scope">
 							<img :src="scope.row.avatar" alt="" style="width: 50px;height: 50px">
 						</template>
 					</el-table-column>
 					<!--<el-table-column prop="username" label="会员名称">-->
 					<!--</el-table-column>-->
 					<el-table-column prop="nickname" label="昵称">
-						<template scope="scope">
+						<template slot-scope="scope">
 							<el-input v-model="scope.row.nickname" placeholder="昵称" @blur="submitNick(scope.$index, scope.row)"></el-input>
 						</template>
 					</el-table-column>
 					<el-table-column prop="gender" label="性别" width="120">
-						<template scope="scope">
+						<template slot-scope="scope">
 							{{ scope.row.gender == 2 ? '女' : '男' }}
 						</template>
 					</el-table-column>
@@ -51,7 +51,7 @@
 					<el-table-column prop="last_login_time" label="最近登录" width="180">
 					</el-table-column>
 					<el-table-column label="操作">
-						<template scope="scope">
+						<template slot-scope="scope">
 							<el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑</el-button>
 							<!-- <el-button plain size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">删除</el-button> -->
 						</template>

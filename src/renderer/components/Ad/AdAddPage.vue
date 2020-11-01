@@ -48,13 +48,13 @@
                             <el-table :data="chooseRelateGoods" stripe style="width: 100%">
                                 <el-table-column prop="id" label="id" width="100"></el-table-column>
                                 <el-table-column prop="list_pic_url" label="商品图片" width="120">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <img :src="scope.row.list_pic_url" alt="" style="width: 40px;height: 40px">
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="name" label="商品名称" width="300px"></el-table-column>
                                 <el-table-column label="操作">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-button
                                                 size="small"
                                                 type="danger"

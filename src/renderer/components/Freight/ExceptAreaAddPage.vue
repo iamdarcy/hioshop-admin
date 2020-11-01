@@ -20,7 +20,7 @@
                             <el-table :data="tableData" style="width: 100%" border stripe>
                                 <el-table-column prop="areaName" label="偏远地区"></el-table-column>
                                 <el-table-column label="操作" width="160">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-button size="small" type="primary" plain
                                                    @click="handleRowEdit(scope.$index, scope.row)">编辑地区
                                         </el-button>

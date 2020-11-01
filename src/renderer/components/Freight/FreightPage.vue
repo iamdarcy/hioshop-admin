@@ -17,12 +17,12 @@
                     <el-table-column prop="name" label="名字"></el-table-column>
                     <el-table-column prop="package_price" label="包装费"></el-table-column>
                     <el-table-column prop="freight_type" label="按件/按重" width="200">
-                        <template scope="scope">
+                        <template slot-scope="scope">
                             {{ scope.row.freight_type == 0 ? '按件' : '按重' }}
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" width="170">
-                        <template scope="scope">
+                        <template slot-scope="scope">
                             <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑</el-button>
                             <el-button size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">删除
                             </el-button>

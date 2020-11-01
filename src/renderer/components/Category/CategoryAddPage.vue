@@ -26,10 +26,11 @@
                         <div class="form-tip"></div>
                     </el-form-item>
                     <el-form-item label="分类图片" prop="img_url" v-if="infoForm.parent_id == 0">
-                        <img v-if="infoForm.img_url" :src="`${infoForm.img_url}`" class="image-show">
+                        <img v-if="infoForm.img_url" :src="infoForm.img_url" class="image-show">
                         <el-upload
                                 class="upload-demo"
                                 name="file"
+                                :headers="{'X-Nideshop-Token': Token}"
                                 :action="qiniuZone"
                                 :on-remove="bannerRemove"
                                 :before-remove="beforeBannerRemove"
@@ -50,6 +51,7 @@
                         <el-upload
                                 class="upload-demo"
                                 name="file"
+                                :headers="{'X-Nideshop-Token': Token}"
                                 :action="qiniuZone"
                                 :on-remove="iconRemove"
                                 :before-remove="beforeIconRemove"
@@ -191,13 +193,12 @@
                 });
             },
             handleUploadBannerSuccess(res, file) {
-                console.log(res)
                 // let url = this.url;
-                this.infoForm.img_url = `${api.qiniu}${res.data}`;
+                this.infoForm.img_url = res.data;
             },
             handleUploadIconSuccess(res, file) {
-                // let url = this.url;
-                this.infoForm.icon_url = `${api.qiniu}${res.data}`;;
+                let url = this.url;
+                this.infoForm.icon_url = res.data;
             },
             getTopCategory() {
                 this.axios.get('category/topCategory').then((response) => {
@@ -232,9 +233,12 @@
             }
 
         },
-        computed: {
-        },
         components: {ElFormItem},
+        computed: {
+            Token() {
+                return localStorage.getItem('token')
+            }
+        },
         mounted() {
             this.getTopCategory();
             this.infoForm.id = this.$route.query.id || 0;

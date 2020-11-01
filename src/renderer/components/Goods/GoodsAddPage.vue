@@ -26,7 +26,7 @@
                     </el-form-item>
                     <el-form-item label="商品图片" prop="list_pic_url" v-if="infoForm.list_pic_url"
                                   class="image-uploader-diy new-height">
-                        <img v-if="infoForm.list_pic_url" :src="getImageURL(infoForm.list_pic_url)" class="image-show">
+                        <img v-if="infoForm.list_pic_url" :src="infoForm.list_pic_url" class="image-show">
                         <el-button class="dele-list-pic" type="primary" @click="delePicList">
                             <i class="fa fa-trash-o"></i>
                         </el-button>
@@ -35,6 +35,7 @@
                         <el-upload
                                 name="file"
                                 class="upload-demo"
+                                :headers="{'X-Nideshop-Token': Token}"
                                 :action="qiniuZone"
                                 :on-success="handleUploadListSuccess"
                                 :before-upload="getQiniuToken"
@@ -49,6 +50,7 @@
                         <el-upload
                                 name="file"
                                 class="upload-demo"
+                                :headers="{'X-Nideshop-Token': Token}"
                                 :action="qiniuZone"
                                 list-type="picture-card"
                                 :on-preview="galleryPreview"
@@ -98,6 +100,7 @@
                         <el-upload
                                 name="file"
                                 class="avatar-uploader"
+                                :headers="{'X-Nideshop-Token': Token}"
                                 :action="qiniuZone"
                                 list-type="picture-card"
                                 :file-list="detail_list"
@@ -463,7 +466,7 @@
             // },
             handlePreview(file) {
                 console.log(file);
-                this.dialogImageUrl = this.getImageURL(file.url);
+                this.dialogImageUrl = file.url;
                 this.dialogVisible = true;
             },
             galleryBefore() {
@@ -492,20 +495,14 @@
             },
             galleryPreview(file) {
                 console.log(file);
-                this.dialogImageUrl = this.getImageURL(file.url);
+                this.dialogImageUrl = file.url;
                 this.dialogVisible = true;
             },
             getGalleryList() {
                 let goodsId = this.infoForm.id;
                 this.axios.post('goods/getGalleryList', {goodsId: goodsId}
                 ).then((response) => {
-                    let gallery_list = response.data.data.galleryData.map(({id, url}) => {
-                        return {
-                            id,
-                            url: this.getImageURL(url)
-                        }
-                    });
-                    this.gallery_list = gallery_list
+                    this.gallery_list = response.data.data.galleryData;
                 })
             },
             kdChange(kdValue) {
@@ -619,7 +616,7 @@
                 });
             },
             handleUploadListSuccess(res) {
-                // let url = this.url;
+                let url = this.url;
                 this.infoForm.list_pic_url = res.data;
                 // this.axios.post('goods/uploadHttpsImage', {url:this.infoForm.list_pic_url}).then((response) => {
                 //     let lastUrl = response.data.data;
@@ -628,11 +625,10 @@
                 // })
             },
             handleUploadIndexPicSuccess(res) {
-                // let url = this.url;
                 this.infoForm.index_pic_url = res.data;
             },
             handleUploadDetailSuccess(res) {
-                let data = this.getImageURL(res.data);
+                let data = res.data;
                 let quill = this.$refs.myTextEditor.quill
                 // 如果上传成功
                 // 获取光标所在位置
@@ -781,11 +777,6 @@
         computed: {
             editor() {
                 return this.$refs.myTextEditor.quillEditor
-            },
-            getImageURL() {
-                return (url) => {
-                    return `${api.qiniu}${url}`
-                }
             }
         },
         mounted() {

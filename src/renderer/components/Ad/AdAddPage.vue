@@ -15,9 +15,11 @@
                 <el-form ref="infoForm" :rules="infoRules" :model="infoForm" label-width="120px">
                     <el-form-item label="广告图片" prop="image_url">
                         <img v-if="infoForm.image_url" :src="infoForm.image_url" class="image-show">
+                        {{fileList}}
                         <el-upload
                                 class="upload-demo"
                                 name="file"
+                                :headers="{'X-Nideshop-Token': Token}"
                                 :action="qiniuZone"
                                 :on-remove="adRemove"
                                 :before-remove="beforeAdRemove"
@@ -226,7 +228,7 @@
                 });
             },
             handleUploadImageSuccess(res, file) {
-                this.infoForm.image_url = `${api.qiniu}${res.data}`;
+                this.infoForm.image_url = res.data
             },
             getInfo() {
                 if (this.infoForm.id <= 0) {
@@ -252,7 +254,11 @@
                 })
             }
         },
-        components: {},
+        computed: {
+            Token() {
+                return localStorage.getItem('token')
+            }
+        },
         mounted() {
             this.infoForm.id = this.$route.query.id || 0;
             this.getInfo();

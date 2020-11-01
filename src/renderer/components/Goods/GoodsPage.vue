@@ -112,7 +112,7 @@
                     <el-table-column prop="id" label="ID" width="120"></el-table-column>
                     <el-table-column prop="list_pic_url" label="商品图片" width="80">
                         <template slot-scope="scope">
-                            <img :src="getImageURL(scope.row.list_pic_url)" alt="" style="width: 40px;height: 40px">
+                            <img :src="scope.row.list_pic_url" alt="" style="width: 40px;height: 40px">
                         </template>
                     </el-table-column>
                     <el-table-column prop="name" label="商品名称"></el-table-column>
@@ -163,7 +163,7 @@
 </template>
 
 <script>
-    import api from '@/config/api';
+
     export default {
         data() {
             return {
@@ -196,13 +196,6 @@
                     name: '王小虎',
                     address: '上海市普陀区金沙江路 1516 弄'
                 }],
-            }
-        },
-        computed: {
-            getImageURL() {
-                return (url) => {
-                    return `${api.qiniu}${url}`
-                }
             }
         },
         methods: {

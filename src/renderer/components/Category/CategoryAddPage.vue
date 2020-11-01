@@ -26,7 +26,7 @@
                         <div class="form-tip"></div>
                     </el-form-item>
                     <el-form-item label="分类图片" prop="img_url" v-if="infoForm.parent_id == 0">
-                        <img v-if="infoForm.img_url" :src="infoForm.img_url" class="image-show">
+                        <img v-if="infoForm.img_url" :src="`${baseURL}${infoForm.img_url}`" class="image-show">
                         <el-upload
                                 class="upload-demo"
                                 name="file"
@@ -126,6 +126,7 @@
                 url: ''
             }
         },
+        
         methods: {
             getQiniuToken() {
                 let that = this
@@ -191,7 +192,7 @@
             },
             handleUploadBannerSuccess(res, file) {
                 let url = this.url;
-                this.infoForm.img_url = url + res.key;
+                this.infoForm.img_url = url;
             },
             handleUploadIconSuccess(res, file) {
                 let url = this.url;
@@ -229,6 +230,11 @@
                 })
             }
 
+        },
+        computed: {
+            baseURL() {
+                return api.qiniu
+            }
         },
         components: {ElFormItem},
         mounted() {

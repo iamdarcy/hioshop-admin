@@ -777,6 +777,9 @@
         computed: {
             editor() {
                 return this.$refs.myTextEditor.quillEditor
+            },
+            Token() {
+                return localStorage.getItem('token')
             }
         },
         mounted() {

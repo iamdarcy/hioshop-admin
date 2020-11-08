@@ -1,5 +1,6 @@
 // const rootUrl = 'http://www.hiolabs.com:8360/admin/';
-const rootUrl = 'https://yangzheng.ink:8080/admin/';
+const domain = process.env.NODE_ENV === "online" ? 'https://yangzheng.ink:8080' : 'http://192.168.1.101:8360';
+const rootUrl = `${domain}/admin/`;
 
 const api = {
     rootUrl : rootUrl,
@@ -10,7 +11,7 @@ const api = {
     //     request_url: 'http://api.kdniao.cc/Ebusiness/EbusinessOrderHandle.aspx'
     // },
 	// 4.19更新，物流查询不需要以上配置，只需要在server的config配置阿里云物流接口就可以
-    qiniu: 'https://yangzheng.ink:8080',
+    qiniu: domain,
     // 请根据自己创建的七牛的区域进行设置：
     // https://developer.qiniu.com/kodo/manual/1671/region-endpoint
 };

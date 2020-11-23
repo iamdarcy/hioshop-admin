@@ -24,7 +24,7 @@
 					<el-table-column prop="nickname" label="用户昵称" width="100px"></el-table-column>
 					<el-table-column prop="goods_id" label="商品ID" width="100px"></el-table-column>
 					<el-table-column prop="list_pic_url" label="图片" width="70px">
-						<template scope="scope">
+						<template slot-scope="scope">
 							<img  :src="scope.row.list_pic_url" alt="" style="width: 50px;height: 50px">
 						</template>
 					</el-table-column>
@@ -34,7 +34,7 @@
                     <el-table-column prop="retail_price" label="成交价"></el-table-column>
 					<el-table-column prop="add_time" label="加入时间"></el-table-column>
 					<el-table-column prop="is_delete" label="是否删除">
-						<template scope="scope">
+						<template slot-scope="scope">
 							<label>{{scope.row.is_delete == 1? '已删':''}}</label>
 						</template>
 					</el-table-column>

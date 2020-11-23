@@ -35,6 +35,7 @@
                         <el-upload
                                 name="file"
                                 class="upload-demo"
+                                :headers="{'X-Nideshop-Token': Token}"
                                 :action="qiniuZone"
                                 :on-success="handleUploadListSuccess"
                                 :before-upload="getQiniuToken"
@@ -49,6 +50,7 @@
                         <el-upload
                                 name="file"
                                 class="upload-demo"
+                                :headers="{'X-Nideshop-Token': Token}"
                                 :action="qiniuZone"
                                 list-type="picture-card"
                                 :on-preview="galleryPreview"
@@ -98,6 +100,7 @@
                         <el-upload
                                 name="file"
                                 class="avatar-uploader"
+                                :headers="{'X-Nideshop-Token': Token}"
                                 :action="qiniuZone"
                                 list-type="picture-card"
                                 :file-list="detail_list"
@@ -123,42 +126,42 @@
                         <div class="spec-wrap">
                             <el-table :data="specData" stripe style="width: 100%">
                                 <el-table-column prop="goods_sn" label="商品SKU" width="140">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-input @blur="checkSkuOnly(scope.$index, scope.row)" size="mini" v-model="scope.row.goods_sn" placeholder="商品SKU"></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="goods_aka" label="快递单上的简称" width="160">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-input size="mini" v-model="scope.row.goods_name" placeholder="简称"></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="value" label="型号/规格" width="130">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-input size="mini" v-model="scope.row.value" placeholder="如1斤/条"></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="cost" label="成本(元)" width="100">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-input size="mini" v-model="scope.row.cost" placeholder="成本"></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="retail_price" label="零售(元)" width="100">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-input size="mini" v-model="scope.row.retail_price" placeholder="零售"></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="goods_weight" label="重量(KG)" width="100">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-input size="mini" v-model="scope.row.goods_weight" placeholder="重量"></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="goods_number" label="库存" width="100">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-input size="mini" v-model="scope.row.goods_number" placeholder="库存"></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column label="操作" width="70">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-button
                                                 size="mini"
                                                 type="danger"
@@ -614,21 +617,18 @@
             },
             handleUploadListSuccess(res) {
                 let url = this.url;
-                this.infoForm.list_pic_url = url + res.key;
-                this.axios.post('goods/uploadHttpsImage', {url:this.infoForm.list_pic_url}).then((response) => {
-                    let lastUrl = response.data.data;
-                    console.log(lastUrl);
-                    this.infoForm.https_pic_url = lastUrl;
-                })
+                this.infoForm.list_pic_url = res.data;
+                // this.axios.post('goods/uploadHttpsImage', {url:this.infoForm.list_pic_url}).then((response) => {
+                //     let lastUrl = response.data.data;
+                //     console.log(lastUrl);
+                //     this.infoForm.https_pic_url = lastUrl;
+                // })
             },
             handleUploadIndexPicSuccess(res) {
-                let url = this.url;
-                console.log(url + res.key);
-                this.infoForm.index_pic_url = url + res.key;
+                this.infoForm.index_pic_url = res.data;
             },
             handleUploadDetailSuccess(res) {
-                let url = this.url;
-                let data = url + res.key;
+                let data = res.data;
                 let quill = this.$refs.myTextEditor.quill
                 // 如果上传成功
                 // 获取光标所在位置
@@ -644,9 +644,9 @@
             },
             handleUploadGallerySuccess(res) {
                 console.log(res);
-                let url = this.url;
+                // let url = this.url;
                 if (res.key != '') {
-                    let urlData = url + res.key;
+                    let urlData = res.data;
                     let id = this.infoForm.id;
                     let info = {
                         url: urlData,
@@ -777,6 +777,9 @@
         computed: {
             editor() {
                 return this.$refs.myTextEditor.quillEditor
+            },
+            Token() {
+                return localStorage.getItem('token')
             }
         },
         mounted() {

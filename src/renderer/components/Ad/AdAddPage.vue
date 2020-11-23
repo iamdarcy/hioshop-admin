@@ -15,9 +15,11 @@
                 <el-form ref="infoForm" :rules="infoRules" :model="infoForm" label-width="120px">
                     <el-form-item label="广告图片" prop="image_url">
                         <img v-if="infoForm.image_url" :src="infoForm.image_url" class="image-show">
+                        {{fileList}}
                         <el-upload
                                 class="upload-demo"
                                 name="file"
+                                :headers="{'X-Nideshop-Token': Token}"
                                 :action="qiniuZone"
                                 :on-remove="adRemove"
                                 :before-remove="beforeAdRemove"
@@ -48,13 +50,13 @@
                             <el-table :data="chooseRelateGoods" stripe style="width: 100%">
                                 <el-table-column prop="id" label="id" width="100"></el-table-column>
                                 <el-table-column prop="list_pic_url" label="商品图片" width="120">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <img :src="scope.row.list_pic_url" alt="" style="width: 40px;height: 40px">
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="name" label="商品名称" width="300px"></el-table-column>
                                 <el-table-column label="操作">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-button
                                                 size="small"
                                                 type="danger"
@@ -226,8 +228,7 @@
                 });
             },
             handleUploadImageSuccess(res, file) {
-                let url = this.url;
-                this.infoForm.image_url = url + res.key;
+                this.infoForm.image_url = res.data
             },
             getInfo() {
                 if (this.infoForm.id <= 0) {
@@ -253,7 +254,11 @@
                 })
             }
         },
-        components: {},
+        computed: {
+            Token() {
+                return localStorage.getItem('token')
+            }
+        },
         mounted() {
             this.infoForm.id = this.$route.query.id || 0;
             this.getInfo();

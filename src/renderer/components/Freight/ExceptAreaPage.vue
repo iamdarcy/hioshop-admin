@@ -12,14 +12,13 @@
         </div>
         <div class="content-main">
             <div class="form-table-box">
-
                 <div class="form-table-box">
                     <el-table :data="tableData" style="width: 100%" border stripe>
                         <el-table-column prop="id" label="ID" width="100px"></el-table-column>
                         <el-table-column prop="content" label="名称" width="200px"></el-table-column>
                         <el-table-column prop="areaName" label="偏远地区"></el-table-column>
                         <el-table-column label="操作" width="200">
-                            <template scope="scope">
+                            <template slot-scope="scope">
                                 <el-button type="primary" size="small" plain
                                            @click="handleRowEdit(scope.$index, scope.row)">编辑
                                 </el-button>

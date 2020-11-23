@@ -21,14 +21,14 @@
                 </div>
                 <el-table v-if="pIndex == 0" :data="categoryData" style="width: 100%" border stripe>
                     <el-table-column prop="name" label="分类名称">
-                        <template scope="scope">
+                        <template slot-scope="scope">
                             <div v-if="scope.row.level==1" class="bg-gray">{{scope.row.name}}</div>
                             <div v-if="scope.row.level==2" class="bg-left">{{scope.row.name}}</div>
                             <!-- {{ scope.row.level == 2 ? '　' : '' }} {{scope.row.name}} -->
                         </template>
                     </el-table-column>
                     <el-table-column label="图标显示" width="80">
-                        <template scope="scope">
+                        <template slot-scope="scope">
                             <el-switch
                                     v-model="scope.row.is_channel"
                                     active-text=""
@@ -38,7 +38,7 @@
                         </template>
                     </el-table-column>
                     <el-table-column label="首页显示" width="80">
-                        <template scope="scope">
+                        <template slot-scope="scope">
                             <el-switch
                                     v-model="scope.row.is_show"
                                     active-text=""
@@ -48,7 +48,7 @@
                         </template>
                     </el-table-column>
                     <el-table-column label="全部产品页面显示" width="140">
-                        <template scope="scope">
+                        <template slot-scope="scope">
                             <el-switch
                                     v-model="scope.row.is_category"
                                     active-text=""
@@ -59,13 +59,13 @@
                     </el-table-column>
 
                     <el-table-column prop="sort_order" label="排序" width="100" sortable>
-                        <template scope="scope">
+                        <template slot-scope="scope">
                             <el-input v-model="scope.row.sort_order" placeholder="排序" @blur="submitSort(scope.$index, scope.row)"></el-input>
                         </template>
                     </el-table-column>
 
                     <el-table-column label="操作" width="300">
-                        <template scope="scope">
+                        <template slot-scope="scope">
                             <el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑</el-button>
                             <el-button size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">删除
                             </el-button>
@@ -80,7 +80,7 @@
                     <el-table-column prop="sort_order" label="排序" width="200">
                     </el-table-column>
                     <el-table-column label="操作" width="160">
-                        <template scope="scope">
+                        <template slot-scope="scope">
                             <el-button size="small" @click="specEdit(scope.$index, scope.row)">编辑</el-button>
                             <el-button size="small" type="danger" @click="specDelete(scope.$index, scope.row)">删除
                             </el-button>

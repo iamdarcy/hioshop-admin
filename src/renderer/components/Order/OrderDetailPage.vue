@@ -28,7 +28,7 @@
                             <el-table-column prop="user_id" label="用户id" width="70"></el-table-column>
                             <el-table-column prop="nickname" label="昵称" width="100"></el-table-column>
                             <el-table-column prop="avatar" label="头像" width="80">
-                                <template scope="scope">
+                                <template slot-scope="scope">
                                     <img :src="scope.row.avatar" alt="" style="width: 60px;height: 60px">
                                 </template>
                             </el-table-column>
@@ -37,7 +37,7 @@
                             <el-table-column prop="address" label="客户地址"></el-table-column>
                             <el-table-column prop="postscript" label="买家备注" width="300"></el-table-column>
                             <el-table-column label="操作">
-                                <template scope="scope">
+                                <template slot-scope="scope">
                                     <el-button size="small" @click="addressEdit(scope.$index, scope.row)">编辑
                                     </el-button>
                                 </template>
@@ -47,7 +47,7 @@
                         <el-table :data="infoForm.goodsList" style="width: 100%" border stripe>
                             <el-table-column prop="goods_sn" label="商品SKU" width="120"></el-table-column>
                             <el-table-column prop="list_pic_url" label="商品图" width="120">list_pic_url
-                                <template scope="scope">
+                                <template slot-scope="scope">
                                     <img :src="scope.row.list_pic_url" alt="" style="width: 60px;height: 60px">
                                 </template>
                             </el-table-column>
@@ -57,12 +57,12 @@
                             <el-table-column prop="retail_price" label="售价" width="100"></el-table-column>
                             <el-table-column prop="number" label="购买数量" width="100"></el-table-column>
                             <el-table-column label="小计" width="100">
-                                <template scope="scope">
+                                <template slot-scope="scope">
                                     <label>{{scope.row.retail_price * scope.row.number }}</label>
                                 </template>
                             </el-table-column>
                             <el-table-column label="操作">
-                                <template scope="scope">
+                                <template slot-scope="scope">
                                     <el-button size="small" @click="goodsListEdit(scope.$index, scope.row)">编辑
                                     </el-button>
                                     <el-button size="small" type="danger"
@@ -189,7 +189,7 @@
                     <label>{{goodsData.goods_id}}</label>
                 </el-form-item>
                 <el-form-item label="商品图:" label-width="120px">
-                    <template scope="scope">
+                    <template slot-scope="scope">
                         <img :src="goodsData.list_pic_url" alt="" style="width: 60px;height: 60px">
                     </template>
                 </el-form-item>

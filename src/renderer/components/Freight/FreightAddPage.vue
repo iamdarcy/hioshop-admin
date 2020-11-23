@@ -48,33 +48,33 @@
                             <el-table :data="defaultData" style="width: 100%" border stripe>
                                 <el-table-column prop="start" :label="infoForm.freight_type == 0?'首件(个)':'首重(KG)'"
                                 >
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-input size="mini" v-model="scope.row.start" placeholder="个"
                                                   @blur="submitValue(scope.$index, scope.row.start)"
                                                   autofocus></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="start_fee" label="运费(元)">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-input size="mini" v-model="scope.row.start_fee" placeholder="运费"
                                                   @blur="submitValue(scope.$index, scope.row.start_fee)"></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="add" :label="infoForm.freight_type == 0?'续件(个)':'续重(KG)'"
                                 >
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-input size="mini" v-model="scope.row.add" placeholder="个"
                                                   @blur="submitValue(scope.$index, scope.row.add)"></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="add_fee" label="运费(元)">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-input size="mini" v-model="scope.row.add_fee" placeholder="运费"
                                                   @blur="submitValue(scope.$index, scope.row.add_fee)"></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="free_by_number" label="按件包邮" width="140">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-switch v-if="scope.row.free_by_number == 0"
                                                    v-model="scope.row.freeByNumber"
                                                    active-color="#13ce66"
@@ -89,7 +89,7 @@
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="free_by_money" label="按金额包邮" width="140">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-switch v-if="scope.row.free_by_money == 0"
                                                    v-model="scope.row.freeByMoney"
                                                    active-color="#13ce66"
@@ -114,33 +114,33 @@
                                 <el-table-column prop="areaName" label="运送到"></el-table-column>
                                 <el-table-column prop="start" :label="infoForm.freight_type == 0?'首件(个)':'首重(KG)'"
                                                  width="90">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-input size="mini" v-model="scope.row.start" placeholder="个"
                                                   @blur="submitValue(scope.$index, scope.row.start)"
                                                   autofocus></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="start_fee" label="运费(元)" width="90">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-input size="mini" v-model="scope.row.start_fee" placeholder="运费"
                                                   @blur="submitValue(scope.$index, scope.row.start_fee)"></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="add" :label="infoForm.freight_type == 0?'续件(个)':'续重(KG)'"
                                                  width="90">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-input size="mini" v-model="scope.row.add" placeholder="个"
                                                   @blur="submitValue(scope.$index, scope.row.add)"></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="add_fee" label="运费(元)" width="90">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-input size="mini" v-model="scope.row.add_fee" placeholder="运费"
                                                   @blur="submitValue(scope.$index, scope.row.add_fee)"></el-input>
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="free_by_number" label="按件包邮" width="120">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-switch v-if="scope.row.free_by_number == 0"
                                                    v-model="scope.row.freeByNumber"
                                                    active-color="#13ce66"
@@ -155,7 +155,7 @@
                                     </template>
                                 </el-table-column>
                                 <el-table-column prop="free_by_money" label="按金额包邮" width="120">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-switch v-if="scope.row.free_by_money == 0"
                                                    v-model="scope.row.freeByMoney"
                                                    active-color="#13ce66"
@@ -171,7 +171,7 @@
                                     </template>
                                 </el-table-column>
                                 <el-table-column label="操作" width="160">
-                                    <template scope="scope">
+                                    <template slot-scope="scope">
                                         <el-button size="mini" type="primary" plain
                                                    @click="handleRowEdit(scope.$index, scope.row)">编辑地区
                                         </el-button>

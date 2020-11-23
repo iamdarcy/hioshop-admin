@@ -30,6 +30,7 @@
                         <el-upload
                                 class="upload-demo"
                                 name="file"
+                                :headers="{'X-Nideshop-Token': Token}"
                                 :action="qiniuZone"
                                 :on-remove="bannerRemove"
                                 :before-remove="beforeBannerRemove"
@@ -50,13 +51,14 @@
                         <el-upload
                                 class="upload-demo"
                                 name="file"
+                                :headers="{'X-Nideshop-Token': Token}"
                                 :action="qiniuZone"
                                 :on-remove="iconRemove"
                                 :before-remove="beforeIconRemove"
                                 :file-list="fileList2"
                                 :data="picData"
                                 :on-success="handleUploadIconSuccess"
-                                :before-upload="getQiniuToken"
+                                :before-upload="uploadValidate"
                         >
                             <el-button v-if="!infoForm.icon_url" size="small" type="primary">点击上传</el-button>
                         </el-upload>
@@ -126,16 +128,17 @@
                 url: ''
             }
         },
+        
         methods: {
-            getQiniuToken() {
-                let that = this
-                this.axios.post('index/getQiniuToken').then((response) => {
-                    let resInfo = response.data.data;
-                    console.log(resInfo);
-                    that.picData.token = resInfo.token;
-                    that.url = resInfo.url;
-                })
-            },
+            // uploadValidate() {
+            //     let that = this
+            //     this.axios.post('index/getQiniuToken').then((response) => {
+            //         let resInfo = response.data.data;
+            //         console.log(resInfo);
+            //         that.picData.token = resInfo.token;
+            //         that.url = resInfo.url;
+            //     })
+            // },
             beforeBannerRemove(file, fileList) {
                 return this.$confirm(`确定移除该图？删除后将无法找回`);
             },
@@ -190,12 +193,12 @@
                 });
             },
             handleUploadBannerSuccess(res, file) {
-                let url = this.url;
-                this.infoForm.img_url = url + res.key;
+                // let url = this.url;
+                this.infoForm.img_url = res.data;
             },
             handleUploadIconSuccess(res, file) {
                 let url = this.url;
-                this.infoForm.icon_url = url + res.key;
+                this.infoForm.icon_url = res.data;
             },
             getTopCategory() {
                 this.axios.get('category/topCategory').then((response) => {
@@ -231,6 +234,11 @@
 
         },
         components: {ElFormItem},
+        computed: {
+            Token() {
+                return localStorage.getItem('token')
+            }
+        },
         mounted() {
             this.getTopCategory();
             this.infoForm.id = this.$route.query.id || 0;

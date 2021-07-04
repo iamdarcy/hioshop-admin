@@ -57,7 +57,7 @@
     "codemirror": "^5.49.0",
     "element-ui": "^2.12.0",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jsbarcode": "^3.11.0",
     "lrz": "^4.9.40",
     "moment": "^2.25.3",

@@ -6,7 +6,8 @@
 				<el-breadcrumb-item>快递列表</el-breadcrumb-item>
 			</el-breadcrumb>
 			<div class="operation-nav">
-				<el-button type="primary" @click="goBackPage" icon="arrow-left">返回</el-button>
+				<el-button plain type="primary" @click="addShipper" icon="arrow-left">添加快递</el-button>
+				<el-button @click="goBackPage" icon="arrow-left">返回</el-button>
 			</div>
 		</div>
 		<div class="content-main">
@@ -24,13 +25,26 @@
 				<el-table :data="tableData" style="width: 100%" border stripe>
 					<el-table-column prop="id" label="ID" width="100px">
 					</el-table-column>
-					<el-table-column prop="name" label="名字">
+					<el-table-column prop="name" label="名字" width="220">
 					</el-table-column>
-					<el-table-column prop="code" label="代号">
+					<el-table-column prop="code" label="代号" width="220">
 					</el-table-column>
-					<el-table-column prop="sort_order" label="排序">
+					<el-table-column prop="sort_order" label="排序" width="220">
+					    <template scope="scope">
+					        <el-input-number class="sort-width" size="mini" :min="1" :max="100" controls-position="right" v-model="scope.row.sort_order" placeholder="排序" @blur="submitSort(scope.$index, scope.row)" @change="submitSort(scope.$index, scope.row)"></el-input-number>
+					    </template>
 					</el-table-column>
-					<el-table-column label="操作" width="170">
+					<el-table-column label="使用" width="80">
+					    <template scope="scope">
+					        <el-switch
+					                v-model="scope.row.enabled"
+					                active-text=""
+					                inactive-text=""
+					                @change='changeStatus($event,scope.row.id)'>
+					        </el-switch>
+					    </template>
+					</el-table-column>
+					<el-table-column label="操作">
 						<template scope="scope">
 							<el-button size="small" @click="handleRowEdit(scope.$index, scope.row)">编辑</el-button>
 							<el-button size="small" type="danger" @click="handleRowDelete(scope.$index, scope.row)">删除</el-button>
@@ -60,6 +74,9 @@ export default {
 		}
 	},
 	methods: {
+		submitSort(index, row){
+		    this.axios.post('shipper/updateSort', { id: row.id,sort:row.sort_order }).then((response) => {})
+		},
         goBackPage() {
             this.$router.go(-1);
         },
@@ -70,17 +87,18 @@ export default {
 			localStorage.setItem('shipperFilterForm', JSON.stringify(this.filterForm));
 			this.getList()
 		},
+		addShipper() {
+			this.$router.push({ name: 'shipper_add', query: { id: 0 } })
+		},
 		handleRowEdit(index, row) {
 			this.$router.push({ name: 'shipper_add', query: { id: row.id } })
 		},
 		handleRowDelete(index, row) {
-
 			this.$confirm('确定要删除?', '提示', {
 				confirmButtonText: '确定',
 				cancelButtonText: '取消',
 				type: 'warning'
 			}).then(() => {
-
 				this.axios.post('shipper/destory', { id: row.id }).then((response) => {
 					console.log(response.data)
 					if (response.data.errno === 0) {
@@ -88,12 +106,9 @@ export default {
 							type: 'success',
 							message: '删除成功!'
 						});
-
 						this.getList();
 					}
 				})
-
-
 			});
 		},
 		onSubmitFilter() {
@@ -110,8 +125,25 @@ export default {
                 this.tableData = response.data.data.data
                 this.page = response.data.data.currentPage
                 this.total = response.data.data.count
+				console.log(this.tableData)
+				for(const item of this.tableData){
+					item.enabled = item.enabled?true:false
+				}
 			})
-		}
+		},
+		changeStatus($event, para) {
+		    this.axios.get('shipper/enabledStatus', {
+		        params: {
+		            status: $event,
+		            id: para
+		        }
+		    }).then((response) => {
+				this.$message({
+					type: 'success',
+					message: '更新成功!'
+				});
+		    })
+		},
 	},
 	components: {
 

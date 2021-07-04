@@ -13,23 +13,22 @@
         <div class="content-main">
             <div class="form-table-box">
                 <el-form ref="infoForm" :rules="infoRules" :model="infoForm" label-width="120px">
-                    <el-form-item label="广告图片" prop="image_url">
-                        <img v-if="infoForm.image_url" :src="infoForm.image_url" class="image-show">
-                        <el-upload
-                                class="upload-demo"
-                                name="file"
-                                :action="qiniuZone"
-                                :on-remove="adRemove"
-                                :before-remove="beforeAdRemove"
-                                :file-list="fileList"
-                                :on-success="handleUploadImageSuccess"
-                                :data="picData"
-                                :before-upload="getQiniuToken"
-                        >
-                            <el-button v-if="!infoForm.image_url" size="small" type="primary">点击上传</el-button>
-                        </el-upload>
-                        <div class="form-tip">图片尺寸：750*440</div>
-                    </el-form-item>
+					<el-form-item label="广告图片" prop="image_url" v-if="infoForm.image_url" class="image-uploader-diy new-height">
+						<div class="index-image">
+							<el-image :preview-src-list="previewList" v-if="infoForm.image_url" :src="infoForm.image_url" @click="previewIndexImg"
+							 class="image-show" fit="cover"></el-image>
+							<div class="o-shadow" @click="delePicList">
+								<i class="el-icon-delete"></i>
+							</div>
+						</div>
+					</el-form-item>
+					<el-form-item label="广告图片" prop="image_url" v-if="!infoForm.image_url">
+						<el-upload name="file" ref="upload" class="upload-demo" :action="qiniuZone" :on-success="handleSuccess"
+						 :before-upload="getQiniuToken" :auto-upload="true" list-type="picture-card" :data="picData" :http-request="uploadIndexImg">
+							<el-button size="small" type="primary">点击上传</el-button>
+							<div slot="tip" class="el-upload__tip">只能上传jpg/png文件</div>
+						</el-upload>
+					</el-form-item>
                     <el-form-item label="商品类型">
                         <el-radio-group v-model="infoForm.link_type">
                             <el-radio :label="0">商品id</el-radio>
@@ -93,16 +92,14 @@
 
 <script>
     import api from '@/config/api';
-
+	import lrz from 'lrz'
+	import moment from 'moment'
     export default {
         data() {
             return {
                 qiniuZone:'',
                 root: '',
                 fileList: [],
-                uploaderHeader: {
-                    'X-Nideshop-Token': localStorage.getItem('token') || '',
-                },
                 infoForm: {
                     id: 0,
                     image_url: '',
@@ -125,10 +122,53 @@
                 },
                 url: '',
                 chooseRelateGoods: [],
-                related_pop: false
+                related_pop: false,
+				previewList: [],
             }
         },
         methods: {
+			handleSuccess(){},
+			previewIndexImg() {
+				let that = this;
+				that.previewList = [];
+				that.previewList.push(that.infoForm.image_url);
+			},
+			delePicList() {
+				let that = this;
+				that.$confirm('确定删除该图片?', '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					})
+					.then(() => {
+						that.infoForm.image_url = '';
+					})
+					.catch(() => {})
+			},
+			uploadIndexImg(request) {
+				const file = request.file;
+				lrz(file).then((rst) => {
+					const config = {
+						headers: {
+							'Content-Type': 'multipart/form-data'
+						},
+					};
+					const fileName = moment().format('YYYYMMDDHHmmssSSS') + Math.floor(Math.random() * 100) + file.name; //自定义图片名
+					const formData = new FormData();
+					formData.append('file', rst.file);
+					formData.append('token', this.picData.token);
+					formData.append('key', fileName);
+					this.$http.post(this.qiniuZone, formData, config).then((res) => {
+						this.handleUploadImageSuccess(res.data)
+					})
+				}).catch(function(err){
+					console.log(err)
+				})
+			},
+			handleUploadImageSuccess(res, file) {
+			    let url = this.url;
+			    this.infoForm.image_url = url + res.key;
+			},
             relateSelect(id) {
                 console.log(id);
                 this.infoForm.goods_id = id;
@@ -149,13 +189,6 @@
             },
             adRemove(file, fileList) {
                 this.infoForm.image_url = '';
-                let id = this.infoForm.id;
-                this.axios.post('ad/deleteAdImage', {id: id}).then((response) => {
-                    this.$message({
-                        type: 'success',
-                        message: '删除成功'
-                    });
-                });
             },
             getQiniuToken() {
                 let that = this
@@ -225,10 +258,6 @@
                     }
                 });
             },
-            handleUploadImageSuccess(res, file) {
-                let url = this.url;
-                this.infoForm.image_url = url + res.key;
-            },
             getInfo() {
                 if (this.infoForm.id <= 0) {
                     return false
@@ -267,11 +296,11 @@
 
 <style scoped>
     .image-show {
-        background-color: #f8f8f8;
-        min-width: 200px;
-        height: 200px;
-        display: block;
-    }
+		width: 375px;
+		height: 220px;
+		background-color: #f9f9f9;
+		display: block;
+	}
 
     .id-input {
         margin-bottom: 20px;
@@ -280,4 +309,28 @@
     .link-input .el-input__inner {
         width: 400px !important;
     }
+	
+	.o-shadow {
+		position: absolute;
+		bottom: 10px;
+		right: 10px;
+		background-color: rgba(0, 0, 0, .5);
+		opacity: 0;
+		transition: opacity .3s;
+		color: #fff;
+		font-size: 20px;
+		line-height: 20px;
+		padding: 10px;
+		cursor: pointer;
+	}
+	
+	.index-image {
+		width: 375px;
+		height: 220px;
+		position: relative;
+	}
+	
+	.index-image:hover .o-shadow {
+		opacity: 1;
+	}
 </style>

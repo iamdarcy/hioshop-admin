@@ -63,11 +63,11 @@
             return {
                 tableData: [],
                 noticeData: {
-                    time:''
+                    time:'',
+					content:''
                 },
                 dialog: false,
                 is_add: false,
-
             }
         },
         methods: {

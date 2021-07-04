@@ -2,8 +2,7 @@
     <div class="content-page">
         <div class="content-nav">
             <el-breadcrumb class="breadcrumb" separator="/">
-                <el-breadcrumb-item :to="{ name: 'dashboard' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item>快递公司</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ name: 'shipper_list'}">快递公司</el-breadcrumb-item>
                 <el-breadcrumb-item>{{infoForm.id ? '编辑快递公司' : '添加快递公司'}}</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="operation-nav">
@@ -19,13 +18,13 @@
                     <el-form-item label="代号" prop="code">
                         <el-input v-model="infoForm.code"></el-input>
                     </el-form-item>
-                    <el-form-item label="客户编号" v-if="infoForm.code == 'YTO'">
+                    <el-form-item label="客户编号">
                         <el-input v-model="infoForm.CustomerName"></el-input>
-                        <div class="tips">圆通需要必填</div>
+                        <div class="form-tips">打印电子面单，需要填写</div>
                     </el-form-item>
-                    <el-form-item label="月结账号" prop="MonthCode">
+                    <el-form-item label="月结账号">
                         <el-input v-model="infoForm.MonthCode"></el-input>
-                        <div class="tips">圆通、顺丰必填</div>
+						<div class="form-tips">打印电子面单，需要填写</div>
                     </el-form-item>
                     <el-form-item label="排序" prop="sort_order">
                         <el-input-number v-model="infoForm.sort_order" :min="1" :max="1000"></el-input-number>
@@ -46,9 +45,6 @@
     export default {
         data() {
             return {
-                uploaderHeader: {
-                    'X-Nideshop-Token': localStorage.getItem('token') || '',
-                },
                 infoForm: {
                     id: 0,
                     name: '',

@@ -1,5 +1,5 @@
-const rootUrl = 'http://www.hiolabs.com:8360/admin/';
-// const rootUrl = 'http://127.0.0.1:8360/admin/';
+// const rootUrl = 'http://www.hiolabs.com:8360/admin/';
+const rootUrl = 'http://127.0.0.1:8360/admin/';
 
 const api = {
     rootUrl : rootUrl,
@@ -13,6 +13,11 @@ const api = {
     qiniu: 'http://up.qiniu.com',
     // 请根据自己创建的七牛的区域进行设置：
     // https://developer.qiniu.com/kodo/manual/1671/region-endpoint
+	// 华东	  http(s)://up.qiniup.com
+	// 华北	  http(s)://up-z1.qiniup.com
+	// 华南	  http(s)://up-z2.qiniup.com
+	// 北美	  http(s)://up-na0.qiniup.com
+	// 东南亚 http(s)://up-as0.qiniup.com
 };
 
 

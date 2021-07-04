@@ -229,8 +229,6 @@
                 })
             },
             specSave(index,row){
-                console.log(index);
-                console.log(row);
                 if(row.goods_name == '' || row.value == '' || row.cost == '' || row.retail_price == '' || row.goods_weight == ''){
                     this.$message({
                         type: 'error',
@@ -245,6 +243,12 @@
                             message: '修改成功!'
                         });
                     }
+					else if (response.data.errno === 100) {
+						this.$message({
+						    type: 'error',
+						    message: response.data.errmsg
+						});
+					}
                 })
 
             },

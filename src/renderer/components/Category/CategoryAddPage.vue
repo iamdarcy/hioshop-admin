@@ -87,9 +87,6 @@
                 qiniuZone:'',
                 fileList: [],
                 fileList2: [],
-                uploaderHeader: {
-                    'X-Nideshop-Token': localStorage.getItem('token') || '',
-                },
                 parentCategory: [
                     {
                         id: 0,

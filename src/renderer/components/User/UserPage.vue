@@ -4,14 +4,6 @@
 			<el-breadcrumb class="breadcrumb" separator="/">
 				<el-breadcrumb-item>用户列表</el-breadcrumb-item>
 			</el-breadcrumb>
-			<div class="operation-nav">
-				<!--<router-link to="/dashboard/user/add">-->
-					<!--<el-button type="primary" icon="plus">添加会员</el-button>-->
-				<!--</router-link>-->
-				<div style="margin-left:10px;"></div>
-				<!--<el-button type="primary" icon="plus" @click="fakeShow" v-if="fake == 0">假的会员</el-button>-->
-				<!--<el-button type="primary" icon="plus" @click="realShow" v-if="fake == 1">真的会员</el-button>-->
-			</div>
 		</div>
 		<div class="content-main">
 			<div class="filter-box">
@@ -24,7 +16,7 @@
 					</el-form-item>
 				</el-form>
 			</div>
-			<div class="form-table-box" v-if="fake == 0">
+			<div class="form-table-box">
 				<el-table :data="tableData" style="width: 100%" border stripe>
 					<el-table-column prop="id" label="ID" width="60">
 					</el-table-column>
@@ -58,7 +50,7 @@
 					</el-table-column>
 				</el-table>
 			</div>
-			<div class="page-box" v-if="fake == 0">
+			<div class="page-box">
 				<el-pagination background @current-change="handlePageChange" :current-page.sync="page" :page-size="10" layout="total, prev, pager, next, jumper" :total="total">
 				</el-pagination>
 			</div>
@@ -77,19 +69,11 @@ export default {
 				name: ''
 			},
 			tableData: [],
-            fakeData:[],
-			fake:0,
             loginInfo:null,
             username:''
 		}
 	},
 	methods: {
-        fakeShow(){
-            this.fake = 1;
-		},
-        realShow(){
-            this.fake = 0;
-		},
         submitNick(index, row){
             this.axios.post('user/updateInfo', { id: row.id,nickname:row.nickname }).then((response) => {
 
@@ -143,7 +127,6 @@ export default {
                 this.tableData = response.data.data.userData.data;
                 this.page = response.data.data.userData.currentPage;
                 this.total = response.data.data.userData.count;
-                this.fakeData = response.data.data.fakeData;
 			})
             if(!this.loginInfo){
                 this.loginInfo = JSON.parse(window.localStorage.getItem('userInfo') || null);

@@ -3,74 +3,75 @@
         <div class="logo">
             <img src="static/images/loading2.gif"/>
         </div>
-        <el-menu class="sidebar" :unique-opened="true" :default-active="currentPagePath" @open="handleOpen"
-                 :router="true" @close="handleClose">
-            <el-menu-item index="/dashboard/welcome">
-                <i class="fa fa-tachometer"></i>
-                <span>后台主页</span>
-            </el-menu-item>
-             <el-menu-item index="/dashboard/order">
-                <i class="fa fa-large fa-reorder"></i>
-                <span>订单列表</span>
-            </el-menu-item>
-            <el-submenu index="goods">
-                <template slot="title">
-                    <i class="fa fa-shopping-bag"></i>
-                    <span>商品管理</span>
-                </template>
-                <el-menu-item index="/dashboard/goods">
-                    <i class="fa fa-circle"></i>
-                    <span>商品列表</span>
-                </el-menu-item>
-                <el-menu-item index="/dashboard/nature">
-                    <i class="fa fa-circle"></i>
-                    <span>商品设置</span>
-                </el-menu-item>
-            </el-submenu>
-            <el-menu-item index="/dashboard/shopcart">
-                <i class="fa fa-large fa-shopping-cart"></i>
-                <span>购物车</span>
-            </el-menu-item>
-            <el-menu-item index="/dashboard/user">
-                <i class="fa fa-large fa-users"></i>
-                <span>用户列表</span>
-            </el-menu-item>
-            <el-submenu index="settings">
-                <template slot="title">
-                    <i class="fa fa-large fa-wrench"></i>
-                    <span>店铺设置</span>
-                </template>
-                <el-menu-item index="/dashboard/settings/showset">
-                    <i class="fa fa-circle"></i>
-                    <span>显示设置</span>
-                </el-menu-item>
-                <el-menu-item index="/dashboard/ad">
-                    <i class="fa fa-circle"></i>
-                    <span>广告列表</span>
-                </el-menu-item>
-                <el-menu-item index="/dashboard/notice">
-                    <i class="fa fa-circle"></i>
-                    <span>公告管理</span>
-                </el-menu-item>
-                <el-menu-item index="/dashboard/freight">
-                    <i class="fa fa-circle"></i>
-                    <span>运费模板</span>
-                </el-menu-item>
-                <el-menu-item index="/dashboard/shipper">
-                    <i class="fa fa-circle"></i>
-                    <span>快递设置</span>
-                </el-menu-item>
-                <el-menu-item index="/dashboard/admin">
-                    <i class="fa fa-circle"></i>
-                    <span>管理员</span>
-                </el-menu-item>
-            </el-submenu>
-            <el-menu-item @click="logout">
-                <i class="fa fa-large fa-sign-out"></i>
-                <span>退出</span>
-            </el-menu-item>
-        </el-menu>
-
+		<div class="a" style="overflow-x: hidden;overflow-y: scroll;height: 100%;">
+			<el-menu class="sidebar" :unique-opened="true" :default-active="currentPagePath" @open="handleOpen"
+					 :router="true" @close="handleClose">
+				<el-menu-item index="/dashboard/welcome">
+					<i class="fa fa-tachometer"></i>
+					<span>后台主页</span>
+				</el-menu-item>
+				 <el-menu-item index="/dashboard/order">
+					<i class="fa fa-large fa-reorder"></i>
+					<span>订单列表</span>
+				</el-menu-item>
+				<el-submenu index="goods">
+					<template slot="title">
+						<i class="fa fa-shopping-bag"></i>
+						<span>商品管理</span>
+					</template>
+					<el-menu-item index="/dashboard/goods">
+						<i class="fa fa-circle"></i>
+						<span>商品列表</span>
+					</el-menu-item>
+					<el-menu-item index="/dashboard/nature">
+						<i class="fa fa-circle"></i>
+						<span>商品设置</span>
+					</el-menu-item>
+				</el-submenu>
+				<el-menu-item index="/dashboard/shopcart">
+					<i class="fa fa-large fa-shopping-cart"></i>
+					<span>购物车</span>
+				</el-menu-item>
+				<el-menu-item index="/dashboard/user">
+					<i class="fa fa-large fa-users"></i>
+					<span>用户列表</span>
+				</el-menu-item>
+				<el-submenu index="settings">
+					<template slot="title">
+						<i class="fa fa-large fa-wrench"></i>
+						<span>店铺设置</span>
+					</template>
+					<el-menu-item index="/dashboard/settings/showset">
+						<i class="fa fa-circle"></i>
+						<span>显示设置</span>
+					</el-menu-item>
+					<el-menu-item index="/dashboard/ad">
+						<i class="fa fa-circle"></i>
+						<span>广告列表</span>
+					</el-menu-item>
+					<el-menu-item index="/dashboard/notice">
+						<i class="fa fa-circle"></i>
+						<span>公告管理</span>
+					</el-menu-item>
+					<el-menu-item index="/dashboard/freight">
+						<i class="fa fa-circle"></i>
+						<span>运费模板</span>
+					</el-menu-item>
+					<el-menu-item index="/dashboard/shipper">
+						<i class="fa fa-circle"></i>
+						<span>快递设置</span>
+					</el-menu-item>
+					<el-menu-item index="/dashboard/admin">
+						<i class="fa fa-circle"></i>
+						<span>管理员</span>
+					</el-menu-item>
+				</el-submenu>
+				<el-menu-item @click="logout">
+					<i class="fa fa-large fa-sign-out"></i>
+					<span>退出</span>
+				</el-menu-item>
+			</el-menu>
+		</div>
     </div>
 </template>
 
@@ -99,10 +100,20 @@
                     localStorage.clear();
                     this.$router.replace({name: 'login'});
                 });
-            }
+            },
+			checkLogin(){
+				this.axios.get('index/checkLogin').then((response) => {
+					console.log(response.data)
+					if (response.data.errno === 401) {
+						localStorage.clear();
+						this.$router.replace({name: 'login'});
+					}
+				})
+			},
         },
         mounted() {
             console.log(this.$route.path);
+			this.checkLogin();
             if(!this.loginInfo){
                 this.loginInfo = JSON.parse(window.localStorage.getItem('userInfo') || null);
             }

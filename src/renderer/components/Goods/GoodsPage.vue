@@ -354,7 +354,7 @@
                             type: 'success',
                             message: '删除成功!'
                         });
-                        let pIndex = localStorage.getItem('pIndex');
+                        let pIndex = this.pIndex;
                         console.log(pIndex);
                         if (pIndex == 0) {
                             that.getList();

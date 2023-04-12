@@ -12,12 +12,12 @@ https://www.bilibili.com/video/av89568075
 服务端： https://github.com/iamdarcy/hioshop-server  
 微信小程序：https://github.com/iamdarcy/hioshop-miniprogram
 
-线上demo：https://www.qile.club/hiolabs
+线上demo：https://www.qile.club/hiolabs  
 用户名：hiolabs  
 密码：hiolabs
 
-<a target="_blank" href="https://www.aliyun.com/minisite/goods?userCode=zm04niet"><img width="1400" src="https://raw.githubusercontent.com/iamdarcy/hiolabs/master/git-images/aliyun.jpg"/></a>
-阿里云主机：低至2折<a target="_blank" href="https://www.aliyun.com/minisite/goods?userCode=zm04niet">立即去看看</a>
+<a target="_blank" href="https://www.aliyun.com/?source=5176.11533457&userCode=zm04niet"><img width="1400" src="https://raw.githubusercontent.com/iamdarcy/hiolabs/master/git-images/aliyun.jpg"></a>
+阿里云主机：低至2折 <a target="_blank" href="https://www.aliyun.com/?source=5176.11533457&userCode=zm04niet">立即去看看</a>
 
 ### 项目截图
 + Dashboard
@@ -60,8 +60,10 @@ git clone https://github.com/iamdarcy/hioshop-admin
 + 安装依赖
 ```
 npm install
-
 ```
+
+如果安装不成功，百度搜索cnpm，用淘宝源代替，替换后，用cnpm i进行安装依赖  
+
 安装依赖后启动后会出现一个问题。
 
 <img width="600" src="https://raw.githubusercontent.com/iamdarcy/hiolabs/master/git-images/error.jpg"/>
@@ -83,13 +85,11 @@ https://www.cnblogs.com/ykbk/p/16615610.html
 + 启动
 ```
 npm run dev
-
 ```
 
 + build 打包成静态文件
 ```
 npm run build:web 或者 sudo npm run build:web
-
 ```
 
 生成的静态文件在dist的web文件夹中，上传到服务器就可以在浏览器中打开了。
@@ -110,5 +110,10 @@ npm run build:web 或者 sudo npm run build:web
 微信小程序：https://github.com/iamdarcy/hioshop-miniprogram  
 
 - 本项目会持续更新和维护，喜欢别忘了 Star，有问题可通过微信、QQ群联系我，谢谢您的关注。
+- 我的微信号是lookgxl，加群时回答这个问题即可入群。  
+海风小店小程序商城1群 824781955（已满）  
+海风小店小程序商城2群 932101372（496）    
+海风小店小程序商城3群 1130172339（已满）  
+海风小店小程序商城4群 652317079    
 <img width="1200" src="https://raw.githubusercontent.com/iamdarcy/hiolabs/master/git-images/contact.jpg"/>
 

@@ -5,6 +5,9 @@
 + 服务端api基于Ｎode.js+ThinkJS+MySQL
 + 后台管理 基于VUE.js+element-ui
 
+### 基于海风小店开发上线的小程序
+<img width="200" src="https://raw.githubusercontent.com/iamdarcy/hiolabs/master/git-images/mwyx.jpg">
+
 #### 视频教程
 https://www.bilibili.com/video/av89568075
 
@@ -115,5 +118,5 @@ npm run build:web 或者 sudo npm run build:web
 海风小店小程序商城2群 932101372（496）    
 海风小店小程序商城3群 1130172339（已满）  
 海风小店小程序商城4群 652317079    
-<img width="1200" src="https://raw.githubusercontent.com/iamdarcy/hiolabs/master/git-images/contact.jpg"/>
+<img width="500" src="https://raw.githubusercontent.com/iamdarcy/hiolabs/master/git-images/contact.jpg"/>
 

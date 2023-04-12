@@ -105,7 +105,8 @@ npm run build:web 或者 sudo npm run build:web
 + 店铺设置：广告列表，公告管理，运费模板（可以根据地区设置相应的运费），管理员
 
 ### 最近更新 
-- 新增生成分享图的功能
+- 12.14 新增生成分享图的功能  
+<img width="600" src="https://images.gitee.com/uploads/images/2020/1118/090429_8fc928b0_1794996.jpeg"/>  
 
 - 项目地址  
 后台管理：https://github.com/iamdarcy/hioshop-admin  

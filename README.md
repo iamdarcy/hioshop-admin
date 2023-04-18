@@ -116,7 +116,7 @@ npm run build:web 或者 sudo npm run build:web
 - 本项目会持续更新和维护，喜欢别忘了 Star，有问题可通过微信、QQ群联系我，谢谢您的关注。
 - 我的微信号是lookgxl，加群时回答这个问题即可入群。  
 海风小店小程序商城1群 824781955（已满）  
-海风小店小程序商城2群 932101372（496）    
+海风小店小程序商城2群 932101372（已满）    
 海风小店小程序商城3群 1130172339（已满）  
 海风小店小程序商城4群 652317079    
 <img width="500" src="https://raw.githubusercontent.com/iamdarcy/hiolabs/master/git-images/contact.jpg"/>

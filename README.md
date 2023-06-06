@@ -15,7 +15,7 @@ https://www.bilibili.com/video/av89568075
 服务端： https://github.com/iamdarcy/hioshop-server  
 微信小程序：https://github.com/iamdarcy/hioshop-miniprogram
 
-线上demo：https://www.qile.club/hiolabs  
+线上demo：https://www.debao.vip/hiolabs  
 用户名：hiolabs  
 密码：hiolabs
 

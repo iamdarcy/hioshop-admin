@@ -18,7 +18,7 @@ https://www.bilibili.com/video/av89568075
 服务端： https://github.com/iamdarcy/hioshop-server   
 web版管理后台：https://github.com/iamdarcy/hioshop-admin-web  
 
-线上demo：[https://www.debao.vip/hiolabs  ](https://demo.qilelab.com/hioshop/)  
+线上demo：[https://demo.qilelab.com/hioshop  ](https://demo.qilelab.com/hioshop/)  
 用户名：qilelab.com    
 密码：qilelab.com   
 
